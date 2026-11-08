@@ -1,0 +1,22 @@
+name: Build unsigned IPA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build for iPhone and package unsigned IPA
+        run: bash scripts/build-unsigned-ipa.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TabDemo-unsigned-ipa
+          path: build/TabDemo-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 7
