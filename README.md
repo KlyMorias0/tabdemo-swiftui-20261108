@@ -5,9 +5,9 @@ Harici paket kullanmaz. iOS 16 ve üzerini destekler.
 
 ## Durum
 
-Kaynak kodu, Xcode projesi ve bulut derleme iş akışı hazırlanmıştır.
-Hazır IPA yoktur. Hazırlandığı Linux ortamında Xcode bulunmadığı için
-uygulama derlenememiş ve iPhone üzerinde test edilememiştir.
+Kaynak kodu ve Xcode projesi GitHub Actions üzerinde macOS ile başarıyla
+derlendi. İmzasız cihaz IPA'sı Releases bölümünde sunulur. Uygulama gerçek
+iPhone üzerinde test edilmedi.
 
 ## Mac olmadan imzasız IPA oluşturma
 
@@ -21,7 +21,7 @@ uygulama derlenememiş ve iPhone üzerinde test edilememiştir.
 GitHub'ın standart macOS Actions çalıştırıcıları herkese açık depolarda
 ücretsizdir; hizmetin güncel kullanım koşulları geçerlidir. Bu iş akışı
 Apple Developer hesabı, sertifika veya üçüncü taraf bağımlılığı istemez.
-Bu oturumda bir GitHub deposuna yükleme veya Actions çalıştırması yapılmadı.
+Derleme iş akışı ayrıca `demo-1.0` sürümüne IPA dosyasını yükler.
 
 ## iPhone'a kurma
 

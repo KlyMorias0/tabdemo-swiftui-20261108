@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -20,3 +20,11 @@ jobs:
           path: build/TabDemo-unsigned.ipa
           if-no-files-found: error
           retention-days: 7
+      - name: Publish downloadable demo
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if ! gh release view demo-1.0 >/dev/null 2>&1; then
+            gh release create demo-1.0 --target "$GITHUB_SHA" --title 'TabDemo 1.0 (unsigned)' --notes 'Minimal SwiftUI demo: Ana Sayfa, Ara, Profil. Unsigned device IPA; sign with your sideload tool before installing. iOS 16 or later.'
+          fi
+          gh release upload demo-1.0 build/TabDemo-unsigned.ipa --clobber
