@@ -20,8 +20,6 @@ jobs:
           xcrun --sdk iphoneos --show-sdk-version
       - name: Build for iPhone and package unsigned IPA
         run: bash scripts/build-unsigned-ipa.sh
-      - name: Launch on iOS 26 simulator and capture native tab bar
-        run: bash scripts/preview-simulator.sh
       - uses: actions/upload-artifact@v4
         with:
           name: TabDemo-unsigned-ipa
@@ -35,4 +33,20 @@ jobs:
           if ! gh release view demo-1.1 >/dev/null 2>&1; then
             gh release create demo-1.1 --target "$GITHUB_SHA" --title 'TabDemo 1.1 — Native Liquid Glass tabs (unsigned)' --notes 'Native SwiftUI TabView built with Xcode 26. Dinle, Keşfet, Kütüphane and a separate system Search tab on iOS 26+. Older iOS versions use the classic system tab bar. Unsigned device IPA; sign with your sideload tool before installing. Simulator screenshot included.'
           fi
-          gh release upload demo-1.1 build/TabDemo-unsigned.ipa build/TabDemo-iOS26.png --clobber
+          gh release upload demo-1.1 build/TabDemo-unsigned.ipa --clobber
+      - name: Launch on iOS 26 simulator and capture native tab bar
+        id: preview
+        timeout-minutes: 8
+        continue-on-error: true
+        run: bash scripts/preview-simulator.sh 2>&1 | tee build/preview.log
+      - name: Publish simulator preview and diagnostics
+        if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -f build/TabDemo-iOS26.png ]; then
+            gh release upload demo-1.1 build/TabDemo-iOS26.png --clobber
+          fi
+          if [ -f build/preview.log ]; then
+            gh release upload demo-1.1 build/preview.log --clobber
+          fi
