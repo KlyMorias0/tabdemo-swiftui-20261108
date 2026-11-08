@@ -1,7 +1,12 @@
 # TabDemo
 
-SwiftUI ile üç sekmeli küçük iOS demosu: Ana Sayfa, Ara, Profil.
+SwiftUI ile yerel iOS sekme çubuğu demosu: Dinle, Keşfet, Kütüphane ve Ara.
 Harici paket kullanmaz. iOS 16 ve üzerini destekler.
+
+iOS 26 SDK'sı ile derlenir. iOS 26 ve üzerinde sistemin Liquid Glass tab bar'ı
+ve `Tab(role: .search)` sayesinde ayrı arama düğmesi kullanılır. Eski iOS
+sürümlerinde klasik yerel tab bar görünür. Koyu tema ve mercan vurgu rengi
+referans görsele göre ayarlanmıştır; kartlar boş demo alanlarıdır.
 
 ## Durum
 
@@ -21,7 +26,8 @@ iPhone üzerinde test edilmedi.
 GitHub'ın standart macOS Actions çalıştırıcıları herkese açık depolarda
 ücretsizdir; hizmetin güncel kullanım koşulları geçerlidir. Bu iş akışı
 Apple Developer hesabı, sertifika veya üçüncü taraf bağımlılığı istemez.
-Derleme iş akışı ayrıca `demo-1.0` sürümüne IPA dosyasını yükler.
+Derleme iş akışı ayrıca `demo-1.1` sürümüne IPA dosyasını ve iOS 26 simülatör
+ekran görüntüsünü yükler. Xcode 26.0.1 kullanır; simülatörde uygulamayı açar.
 
 ## iPhone'a kurma
 
